@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Enter 1st URL: <input type="url" id="firstURL" > <br>
+<button id="myBtn1" onclick="myFunction('firstURL', 'demo1','1st')">1st URL output</button>
+<p id="demo1"></p>
+<br>
+
+Enter 2nd URL: <input type="url" id="secondURL" > <br>
+<button id="myBtn2" onclick="myFunction('secondURL', 'demo2','2nd')">2nd URL output</button>
+<p id="demo2"></p>
+<br>
+
+Enter 3rd URL: <input type="url" id="thirdURL" > <br>
+<button id="myBtn3" onclick="myFunction('thirdURL', 'demo3','3rd')">3rd URL output</button>
+<p id="demo3"></p>
+<br>
+
+Enter 4th URL: <input type="url" id="fourthURL" > <br>
+<button id="myBtn4" onclick="myFunction('fourthURL', 'demo4','4th')">4th URL output</button>
+<p id="demo4"></p>
+<br>
+
+<button id="myBtn5" onclick="compare()">Compare</button>
+<p id="demo5"></p>
+
+</body>
+
+<script>
+function myFunction(input, para,val) {
+    var x = document.getElementById(input).value;
+    document.getElementById(para).innerHTML = "Your "+val+" URL is : " + x;
+}    
+
+function compare() {
+    var x1 = document.getElementById("firstURL").value;
+    var x2 = document.getElementById("secondURL").value;
+    var x3 = document.getElementById("thirdURL").value;
+    var x4 = document.getElementById("fourthURL").value;
+    var str1 = getString(x1)
+    var str2 = getString(x2)
+    var str3 = getString(x3)
+    var str4 = getString(x4)
+    if (str1 == str2 || str1 == str3 || str1 == str4) document.getElementById("demo5").innerHTML = 1
+    else
+    document.getElementById("demo5").innerHTML = 0 
+    
+}    
+
+function getString(str){
+	var count1 = str.indexOf(".")
+    var count2 = str.indexOf(".",count1+1)
+    if(count2 == -1)      //1 '.' only
+    {
+    	if( str.indexOf("https") == -1 && str.indexOf("http") == -1)
+        	var stringUse = str.substring(0,count1)
+        else {   
+   			var pos1 = str.lastIndexOf('/')
+            var stringUse = str.substring(pos1+1,count1)
+            }
+        
+    }
+    else	                  // >1 '.' */
+    {
+    	var count3 = str.lastIndexOf(".")
+    	var count4 = str.lastIndexOf(".",count3-1)
+        var stringUse = str.substring(count4+1,count3)
+    }
+    return stringUse
+}
+
+
+</script>
+
+</html>
+
